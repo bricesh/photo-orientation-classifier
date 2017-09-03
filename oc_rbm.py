@@ -26,9 +26,28 @@ img_label = np.vstack(img_label)
 img_flat_data = img_data[1]
 
 
-n_visible = mnist_width * mnist_width
-n_hidden = 500
+n_visible = img_flat_data[1].size
+n_hidden = 40000
 corruption_level = 0.3
+
+# create node for input data
+X = tf.placeholder("float", [None, n_visible], name='X')
+
+# create node for corruption mask
+mask = tf.placeholder("float", [None, n_visible], name='mask')
+
+# create nodes for hidden variables
+W_init_max = 4 * np.sqrt(6. / (n_visible + n_hidden))
+W_init = tf.random_uniform(shape=[n_visible, n_hidden],
+                           minval=-W_init_max,
+                           maxval=W_init_max)
+
+W = tf.Variable(W_init, name='W')
+b = tf.Variable(tf.zeros([n_hidden]), name='b')
+
+W_prime = tf.transpose(W)  # tied weights between encoder and decoder
+b_prime = tf.Variable(tf.zeros([n_visible]), name='b_prime')
+
 
 X_train, X_test, y_train, y_test = train_test_split(img_flat_data,
                                                     img_label,
