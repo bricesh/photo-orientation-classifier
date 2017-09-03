@@ -126,3 +126,24 @@ def train_neural_network(x):
 		print('Accuracy:',accuracy.eval({x:X_test, y:y_test}))
 
 train_neural_network(x)
+
+
+
+#
+#
+#
+#
+#url = "https://www.dropbox.com/[something]/[filename]?dl=1"  # dl=1 is important
+#import urllib.request
+#u = urllib.request.urlopen(url)
+#data = u.read()
+#u.close()
+ 
+#with open([filename], "wb") as f :
+#    f.write(data)
+#
+#
+#
+#
+#
+#
